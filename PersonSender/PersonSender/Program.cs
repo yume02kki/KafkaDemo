@@ -1,0 +1,24 @@
+﻿using System;
+using System.Threading.Tasks;
+using Confluent.Kafka;
+using PersonSender;
+
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Produce : 1 | Consume: 2\n > ");
+        switch (Console.ReadLine())
+        {
+            case "1":
+                Person person = new Person();
+                Producer<Person> producer = new("p1", person);
+                break;
+            case "2":
+                Consumer consumer = new Consumer();
+                consumer.get();
+                break;
+        }
+    }
+}

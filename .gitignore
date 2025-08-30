@@ -1,0 +1,20 @@
+#ai generated
+
+# .NET
+**/[Bb]in/
+**/[Oo]bj/
+*.user
+.vs/
+*.csproj
+*.sln
+
+# Rider
+.idea/
+
+# Kafka & Data
+KafkaServer/kafka/
+8200data/
+
+# AWS
+**/aws-access-keys*
+*.pem
