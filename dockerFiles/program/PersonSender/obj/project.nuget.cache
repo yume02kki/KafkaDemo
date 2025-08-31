@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "fIDRe7/8Lfg=",
+  "success": true,
+  "projectFilePath": "/home/ben/Desktop/docker8200/dockerFiles/program/PersonSender/PersonSender.csproj",
+  "expectedPackageFiles": [
+    "/home/ben/.nuget/packages/confluent.kafka/2.11.1/confluent.kafka.2.11.1.nupkg.sha512",
+    "/home/ben/.nuget/packages/dapper/2.1.66/dapper.2.1.66.nupkg.sha512",
+    "/home/ben/.nuget/packages/librdkafka.redist/2.11.1/librdkafka.redist.2.11.1.nupkg.sha512",
+    "/home/ben/.nuget/packages/oracle.manageddataaccess.core/23.9.1/oracle.manageddataaccess.core.23.9.1.nupkg.sha512",
+    "/home/ben/.nuget/packages/system.configuration.configurationmanager/8.0.0/system.configuration.configurationmanager.8.0.0.nupkg.sha512",
+    "/home/ben/.nuget/packages/system.diagnostics.eventlog/8.0.0/system.diagnostics.eventlog.8.0.0.nupkg.sha512",
+    "/home/ben/.nuget/packages/system.diagnostics.performancecounter/8.0.0/system.diagnostics.performancecounter.8.0.0.nupkg.sha512",
+    "/home/ben/.nuget/packages/system.directoryservices.protocols/8.0.2/system.directoryservices.protocols.8.0.2.nupkg.sha512",
+    "/home/ben/.nuget/packages/system.formats.asn1/8.0.1/system.formats.asn1.8.0.1.nupkg.sha512",
+    "/home/ben/.nuget/packages/system.memory/4.6.0/system.memory.4.6.0.nupkg.sha512",
+    "/home/ben/.nuget/packages/system.security.cryptography.pkcs/8.0.1/system.security.cryptography.pkcs.8.0.1.nupkg.sha512",
+    "/home/ben/.nuget/packages/system.security.cryptography.protecteddata/8.0.0/system.security.cryptography.protecteddata.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

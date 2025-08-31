@@ -3,7 +3,7 @@ source .env
 echo "Select container to run:"
 echo "1) Kafka"
 echo "2) OracleDB" 
-echo "3) All"
+echo "3) Both"
 read -p "> " choice
 case $choice in
     1) sudo docker compose -f $KAFKA up -d ;;

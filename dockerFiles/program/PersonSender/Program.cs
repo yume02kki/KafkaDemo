@@ -14,6 +14,8 @@ class Program
         {
             case "1":
                 Person person = new Person();
+                person.FirstName = "John";
+                person.LastName = "Clements";
                 Producer<Person> producer = new(topic);
                 producer.Send("p1", person);
                 break;
