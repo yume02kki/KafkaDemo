@@ -54,3 +54,4 @@
 /home/ben/Desktop/docker8200/dockerFiles/program/PersonSender/bin/Debug/net8.0/runtimes/osx/lib/net8.0/System.DirectoryServices.Protocols.dll
 /home/ben/Desktop/docker8200/dockerFiles/program/PersonSender/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.DirectoryServices.Protocols.dll
 /home/ben/Desktop/docker8200/dockerFiles/program/PersonSender/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Security.Cryptography.Pkcs.dll
+/home/ben/Desktop/docker8200/dockerFiles/program/PersonSender/obj/Debug/net8.0/PersonSender.sourcelink.json

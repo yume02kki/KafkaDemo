@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Confluent.Kafka;
 using PersonSender.Kafka;
 using PersonSender.KafkaFunctions;
@@ -12,6 +13,8 @@ public class Consumer : KafkaObject
 
     public void Start()
     {
+        const string connectionStr = "Data Source=localhost:1521/XE;User Id=PROJECT_SCHEMA;Password=1;";
+        DBconnection db_connection = new DBconnection(connectionStr);
         using var consumer = new ConsumerBuilder<string, string>(ConfigData.ConsumerConfig).Build();
         consumer.Subscribe(topicName);
         while (true)
@@ -20,10 +23,16 @@ public class Consumer : KafkaObject
 
             if (result != null)
             {
-                Person personGot = JsonEdit.Deserialize<Person>(result.Message.Value);
-                Console.WriteLine($"Key: {result.Message.Key}, Value: {result.Message.Value}");
-                Console.WriteLine("this bloke is: " + personGot.FirstName + " " + personGot.LastName);
-                consumer.Commit(result);
+                try
+                {
+                    Person personGot = JsonEdit.Deserialize<Person>(result.Message.Value);
+                    Console.WriteLine("person: " + personGot.FirstName + " " + personGot.LastName);
+                    db_connection.insert(personGot);
+                    consumer.Commit(result);
+                }
+                catch (JsonException exception)
+                {
+                }
             }
         }
     }
