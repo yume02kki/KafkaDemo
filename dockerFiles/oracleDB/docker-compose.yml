@@ -7,7 +7,7 @@ services:
     environment:
       - ORACLE_PWD=1
     volumes:
-      - oracle-data:/opt/oracle/oradata
+      # - oracle-data:/opt/oracle/oradata
       - ./init.sql:/opt/oracle/scripts/startup/init.sql
 volumes:
   oracle-data:
