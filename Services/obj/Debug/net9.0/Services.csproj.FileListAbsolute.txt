@@ -1,0 +1,6 @@
+/home/ben/Desktop/docker8200/Services/obj/Debug/net9.0/Services.csproj.AssemblyReference.cache
+/home/ben/Desktop/docker8200/Services/obj/Debug/net9.0/Services.GeneratedMSBuildEditorConfig.editorconfig
+/home/ben/Desktop/docker8200/Services/obj/Debug/net9.0/Services.AssemblyInfoInputs.cache
+/home/ben/Desktop/docker8200/Services/obj/Debug/net9.0/Services.AssemblyInfo.cs
+/home/ben/Desktop/docker8200/Services/obj/Debug/net9.0/Services.csproj.CoreCompileInputs.cache
+/home/ben/Desktop/docker8200/Services/obj/Debug/net9.0/Services.sourcelink.json
