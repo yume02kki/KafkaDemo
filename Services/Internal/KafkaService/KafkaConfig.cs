@@ -4,18 +4,20 @@ namespace PersonSender.Kafka;
 
 public static class KafkaConfig
 {
-    private static readonly string Host = "localhost:9092";
+    public static readonly string Host = "localhost:9092";
     public static string Topic { get; private set; } = "person-topic";
-    
-    public static ConsumerConfig ConsumerConfig { get; private set; } = new ConsumerConfig
+
+    public static ConsumerConfig ConsumerConfig { get; private set; } = new()
     {
+        AutoOffsetReset = AutoOffsetReset.Earliest,
+        EnableAutoCommit = true,
         BootstrapServers = Host,
-        GroupId = "cs-consumer-group",
+        GroupId = "consumer-group"
     };
 
-    public static ProducerConfig ProducerConfig { get; private set; } = new ProducerConfig
+    public static ProducerConfig ProducerConfig { get; private set; } = new()
     {
         BootstrapServers = Host,
-        ClientId = "cs-producer-client"
+        ClientId = "producer-client"
     };
 }

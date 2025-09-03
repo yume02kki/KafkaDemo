@@ -1,10 +1,38 @@
-﻿class Program
-{
-    static void Main(string[] args)
-    {
-        const string topicName = "person-topic";
+﻿using PersonSender.Kafka;
 
-        var person = new Person
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        var consumer = new PersonConsumer();
+        var producer = new Producer();
+
+        Action<Person> dbUpdate = personReceived =>
+        {
+            Console.WriteLine("ran once");
+            QueryRunner.run("Address", EntryBuilder.Build(personReceived.Address));
+            QueryRunner.run("Person", EntryBuilder.Build(personReceived, "Address", personReceived.Address.Id.Value));
+            Console.WriteLine("db updated successfully");
+        };
+
+        Task.Run(() => consumer.Start(KafkaConfig.Topic, dbUpdate));
+
+        while (true)
+        {
+            Console.WriteLine("Hit enter to send task...");
+            Console.ReadLine();
+            var person = PersonGenerator();
+
+            producer.Send(KafkaConfig.Topic, person.Id.Value.ToString().Substring(0, 10), person);
+            person.Id = Guid.NewGuid();
+            person.Address.Id = Guid.NewGuid();
+        }
+    }
+
+
+    private static Person PersonGenerator()
+    {
+        return new Person
         {
             Id = Guid.NewGuid(),
             FirstName = "John",
@@ -24,20 +52,5 @@
             },
             Status = PersonStatus.Insert
         };
-
-        Producer producer = new Producer();
-        PersonConsumer consumer = new PersonConsumer();
-
-        producer.Send(topicName, person.Id.Value.ToString().Substring(0, 10), person);
-
-        //kafka => db
-        {
-            var packet = consumer.Start(topicName);
-            if (packet is Person personGot && personGot.Address != null)
-            {
-                QueryRunner.run("ADDRESS", EntryBuilder.Build(personGot.Address));
-                QueryRunner.run("PERSON", EntryBuilder.Build(personGot, "Address", person.Address.Id.Value));
-            }
-        }
     }
 }

@@ -1,31 +1,30 @@
-using System.ComponentModel;
 using System.Text.Json;
 using Confluent.Kafka;
 using PersonSender.Kafka;
 
 public class PersonConsumer
 {
-    private ConsumerBuilder<string, string> consumerBuilder;
+    private readonly ConsumerBuilder<string, string> consumerBuilder;
+
     public PersonConsumer()
     {
-        this.consumerBuilder = new ConsumerBuilder<string, string>(KafkaConfig.ConsumerConfig);
+        consumerBuilder = new ConsumerBuilder<string, string>(KafkaConfig.ConsumerConfig);
     }
 
-    public Person? Start(string topicName)
+    public void Start(string topicName, Action<Person> eventHook)
     {
         using var consumer = consumerBuilder.Build();
         consumer.Subscribe(topicName);
-        try
-        {
-            var result = consumer.Consume();
-            if (result?.Message?.Value != null)
+        while (true)
+            try
             {
-                return JsonSerializer.Deserialize<Person>(result.Message.Value);
+                var result = consumer.Consume();
+                var person = JsonSerializer.Deserialize<Person>(result.Message.Value);
+                eventHook(person);
             }
-        }
-        catch (ConsumeException)
-        {
-        }
-        return null;
+
+            catch (ConsumeException)
+            {
+            }
     }
 }

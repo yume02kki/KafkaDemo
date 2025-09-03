@@ -4,10 +4,11 @@ using PersonSender.Kafka;
 
 public class Producer
 {
-    private ProducerBuilder<string, string> producerBuilder;
+    private readonly ProducerBuilder<string, string> producerBuilder;
+
     public Producer()
     {
-        this.producerBuilder = new ProducerBuilder<string, string>(KafkaConfig.ProducerConfig);
+        producerBuilder = new ProducerBuilder<string, string>(KafkaConfig.ProducerConfig);
     }
 
     public void Send(string topicName, string key, Person payload)
@@ -26,6 +27,5 @@ public class Producer
         catch (ProduceException<string, string>)
         {
         }
-
     }
 }
