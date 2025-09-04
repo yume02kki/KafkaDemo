@@ -4,27 +4,31 @@ using PersonSender.Kafka;
 
 public class PersonConsumer
 {
-    private readonly ConsumerBuilder<string, string> consumerBuilder;
-
-    public PersonConsumer()
+    public void Start(Action<Person> eventHook)
     {
-        consumerBuilder = new ConsumerBuilder<string, string>(KafkaConfig.ConsumerConfig);
-    }
+        using (var consumer = new ConsumerBuilder<Ignore, string>(KafkaConfig.ConsumerConfig).Build())
+        {
+            consumer.Subscribe(KafkaConfig.TopicConfig.Name);
 
-    public void Start(string topicName, Action<Person> eventHook)
-    {
-        using var consumer = consumerBuilder.Build();
-        consumer.Subscribe(topicName);
-        while (true)
+            var consumerTokenSource = new CancellationTokenSource();
+            Console.CancelKeyPress += (_, e) =>
+            {
+                e.Cancel = true;
+                consumerTokenSource.Cancel();
+            };
             try
             {
-                var result = consumer.Consume();
-                var person = JsonSerializer.Deserialize<Person>(result.Message.Value);
-                eventHook(person);
+                while (true)
+                {
+                    var consumeResult = consumer.Consume(consumerTokenSource.Token);
+                    eventHook(JsonSerializer.Deserialize<Person>(consumeResult.Message.Value));
+                    consumer.Commit(consumeResult);
+                }
             }
-
-            catch (ConsumeException)
+            catch (OperationCanceledException)
             {
+                consumer.Close();
             }
+        }
     }
 }

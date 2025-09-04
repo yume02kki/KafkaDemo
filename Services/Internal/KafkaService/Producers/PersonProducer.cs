@@ -22,6 +22,7 @@ public class Producer
                 Value = JsonSerializer.Serialize(payload)
             };
             producer.Produce(topicName, message);
+            Console.WriteLine("Sent");
             producer.Flush();
         }
         catch (ProduceException<string, string>)

@@ -1,1 +1,8 @@
-*.docx
+Services/**/bin/
+Services/**/obj/
+**/obj/
+Services/**/.idea/
+Services/**/*.user
+Services/**/*.sln
+Services/**/*.info
+Services/**/*.cache
