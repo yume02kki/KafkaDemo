@@ -6,3 +6,5 @@ Services/**/*.user
 Services/**/*.sln
 Services/**/*.info
 Services/**/*.cache
+gitpass
+gitpass.pub
