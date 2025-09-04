@@ -8,3 +8,4 @@ Services/**/*.info
 Services/**/*.cache
 gitpass
 gitpass.pub
+!README.MD
